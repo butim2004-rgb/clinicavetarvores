@@ -124,6 +124,7 @@ JOIN veterinário v ON v.id_veterinario = co.id_veterinario;
 
 
 
+"arquivo drawio nao funcionou no sqlite"
 
 
 
