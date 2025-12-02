@@ -1,0 +1,138 @@
+BEGIN TRANSACTION;
+
+Create table cliente(
+	id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,
+	nome TEXT NOT NULL,
+	telefone TEXT(15)
+);
+
+
+Create table Pet(
+	id_pet INTEGER PRIMARY KEY AUTOINCREMENT,
+	nome TEXT(30),
+	especie TEXT(30),
+	idade INTEGER,
+	id_cliente INTEGER,
+	FOREIGN KEY (id-cliente) REFERENCES cliente(id_cliente)
+);
+
+Create table veterinario(
+	id_veterinario INTEGER PRIMARY KEY AUTOINCREMENT,
+	nome TEXT(100) NOT NULL,
+	cmrv TEXT(20) NOT NULL,
+);
+
+Create table consulta(
+	id_consulta INTEGER PRIMARY KEY AUTOINCREMENT,
+	data TEXT NOT NULL, 
+	tipo_servico TEXT(100),
+	id_pet INTEGER,
+	id_veterinario INTEGER,
+	FOREIGN KEY (id_pet) REFERENCES Pet(id_pet),
+	FOREIGN KEY (id_veterinario) REFERENCES veterinario(id_veterinario),
+
+);
+
+
+Create table medicamento(
+	id_medicamento INTEGER PRIMARY KEY AUTOINCREMENT,
+	nome TEXT NOT NULL,
+	quantidade INTEGER,
+	validade medicamento TEXT,
+	id-consulta INTEGER,
+	FOREIGN KEY (id_consulta) REFERENCES consulta(id_consulta),
+);
+
+
+Create table medicamento consulta(
+	id-consulta INTEGER,
+	id_medicamento INTEGER,
+	dose aplicada TEXT,
+	FOREIGN KEY (id_consulta) REFERENCES consulta(id_consulta),
+	FOREIGN KEY (id_medicamento) REFERENCES consulta(id_medicamento),
+);
+
+PS:" AGORA COLOCAR INSERT NA AREA CORRETA"
+
+INSERT INTO cliente(nome, telefone)
+VALUES
+('ANA LUIZA COUTINHO', '119999999-99'),
+('Jose teste', '119888888-88'),
+('MARIA DO CARMO', '1197777666-66');
+
+
+select * from cliente;
+
+INSERT INTO pet(nome, espécie, idade, id_cliente)
+VALUES
+('Rex', 'cachorro',5, 3),
+('Cleyton', 'gato',4, 1),
+('THOR', 'cachorro',6, 2);
+
+select * from Pet;
+
+INSERT INTO veterinário(nome,cmrv)
+VALUES
+('DRA.MARISA TESTE','SPA1234'),
+('DR.BRUNO CARVALHO','SP1020'),
+(DR.TESTE, 'GO1234');
+
+select * from veterinario
+
+INSERT INTO consulta(data, tipo serviço, id_pet, id_veterinario)
+VALUES
+('2025-05-30','vacina',1,1),
+('2025-06-02','castracao',2,2),
+('2025-11-05','retorno',1,1);
+
+select * from consulta;
+
+
+INSERT INTO medicamento(nome, quantidade, validade, medicamento, id_consulta)
+VALUES
+('vermit', 2, '2030-11-30',1),
+('vermit02', 3, '2030-12-30',2),
+('vermit03', 1, '2031-01-30',3);
+
+select * from medicamento
+
+INSERT INTO medicamento_consulta(id_consulta,id_edicamento,dose_aplicada)
+VALUES
+(1,1, '1 dose unica'),
+(1,2, 'Aplicar 2 gotas no ouvido'),
+(3,2, '1 comprimido');
+
+
+"AGORA VAI COLOCAR UM UPDATE UMA MUDANCA NA TABELA MUITO IMPORTANTE COLOCAR WHERE"
+
+
+UPDATE medicamento
+set nome ='dipirona'
+where id_medicamento =2;
+
+
+select * from medicamento;
+
+select 
+	co.id_consulta,
+	co.data,
+	v.nome AS veterinário,
+	v.crmv
+FROM consulta co
+JOIN veterinário v ON v.id_veterinario = co.id_veterinario;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
